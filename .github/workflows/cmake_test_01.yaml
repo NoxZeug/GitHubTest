@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: first step of first job
         shell: bash
-        run: echo $PATH
+        run: ls -al
 
          
  
