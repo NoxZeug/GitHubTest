@@ -1,0 +1,135 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "vendor": {
+    "name": "own"
+  },
+  "configurePresets": [
+    {
+      "name": "base_settings",
+      "hidden": true,
+      "environment": {
+        "CONFIG_BUILD_DIR": "${sourceDir}/_build/$env{COMPUTERNAME}_preset_${presetName}" ,
+        "CONFIG_RESULT_DIR": "${sourceDir}/_result/$env{COMPUTERNAME}_preset_${presetName}" ,
+        "CONFIG_INSTALL_DIR": "${sourceDir}/_install/$env{COMPUTERNAME}_preset_${presetName}"
+      },
+      "binaryDir": "$env{CONFIG_BUILD_DIR}",
+      "installDir": "$env{CONFIG_INSTALL_DIR}",
+      "cacheVariables": {
+        "CMAKE_MESSAGE_LOG_LEVEL": {
+          "type": "STRING",
+          "value": "TRACE"
+        },
+        "CONFIG_PRESET_NAME": {
+          "type": "STRING",
+          "value": "${presetName}"
+        },
+        "CONFIG_BUILD_DIR": {
+          "type": "PATH",
+          "value": "$env{CONFIG_BUILD_DIR}"
+        },
+        "CONFIG_RESULT_DIR": {
+          "type": "PATH",
+          "value": "$env{CONFIG_RESULT_DIR}"
+        },
+        "CONFIG_INSTALL_DIR": {
+          "type": "PATH",
+          "value": "$env{CONFIG_INSTALL_DIR}"
+        }
+      }
+    },
+    {
+      "name": "VS2019",
+      "hidden": false,
+      "displayName": "Config VS2019",
+      "description": "Default build using Visual Studio 16 2019",
+      "inherits": [ "base_settings" ],
+      "generator": "Visual Studio 16 2019",
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "cacheVariables": {
+        "CONAN_PROFILE_FILE": {
+          "type": "STRING",
+          "value": "VS2019_v142_x64"
+        }
+      }
+    },
+    {
+      "name": "VS2022",
+      "hidden": false,
+      "displayName": "Config VS2022",
+      "description": "Default build using Visual Studio 17 2022",
+      "inherits": [ "base_settings" ],
+      "generator": "Visual Studio 17 2022",
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "cacheVariables": {
+        "CONAN_PROFILE_FILE": {
+          "type": "STRING",
+          "value": "VS2022_v143_x64"
+        }
+      }
+    },
+    {
+      "name": "VS2022_v142",
+      "hidden": false,
+      "displayName": "Config VS2022 v142",
+      "description": "Default build using Visual Studio 17 2022 v142",
+      "inherits": [ "base_settings" ],
+      "generator": "Visual Studio 17 2022",
+      "toolset":{
+        "value": "v142",
+        "strategy": "set"
+      },
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "cacheVariables": {
+        "CONAN_PROFILE_FILE": {
+          "type": "STRING",
+          "value": "VS2022_v142_x64"
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build_VS2019",
+      "hidden": false,
+      "displayName": "Default Config (Build)",
+      "description": "(Build) Default build using 'Visual Studio 16 2019'",
+      "configurePreset": "VS2019",
+      "jobs": 4,
+      "configuration": "Release",
+      "cleanFirst": false,
+      "verbose": false
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test_VS2019",
+      "hidden": false,
+      "displayName": "Default Config (Tests)",
+      "description": "(Tests) Default build using Visual Studio 16 2019 generator",
+      "configurePreset": "VS2019",
+      "output": {
+        "shortProgress": true,
+        "verbosity": "default",
+        "outputOnFailure": true
+      },
+      "execution": {
+        "stopOnFailure": true,
+        "noTestsAction": "error"
+      }
+    }
+  ]
+}
