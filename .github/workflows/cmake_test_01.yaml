@@ -21,6 +21,12 @@ jobs:
       - name: first step of first job
         shell: bash
         run: ls -al
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: third step of first job
+        shell: bash
+        run: ls -al
 
          
  
