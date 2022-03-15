@@ -12,15 +12,15 @@ on:
 env:
   CMAKE_VERSION: 3.22.1
   BUILD_TYPE: Release
-  
- jobs:
-   my_first_job:
-     name: My first job
-     runs-on: windows-latest
-     steps:
-       - name: first step of first job
-         shell: bash
-         run: echo $PATH
+
+jobs:
+  my_first_job:
+    name: My first job
+    runs-on: windows-latest
+    steps:
+      - name: first step of first job
+        shell: bash
+        run: echo $PATH
 
          
  
